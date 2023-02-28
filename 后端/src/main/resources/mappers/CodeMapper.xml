@@ -1,0 +1,212 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.code_manager.dao.CodeDao">
+    <resultMap id="GeographicInformationCode" type="GeographicInformationCode">
+        <id property="rawData" column="rawData" />
+        <result property="province" column="province_name"/>
+        <result property="prefecture" column="prefecture_name"/>
+        <result property="county" column="county_name"/>
+        <result property="street" column="street_name"/>
+        <result property="community" column="community_name"/>
+    </resultMap>
+
+    <resultMap id="DisasterCode_class" type="DisasterCode">
+        <result property="major" column="class_name"/>
+        <result property="subclass" column="subclass_name"/>
+    </resultMap>
+    <resultMap id="DisasterCode_quota" type="DisasterCode">
+        <result property="major" column="class_name"/>
+        <result property="quota" column="quota_name"/>
+    </resultMap>
+
+    <resultMap id="SourceCode" type="SourceCode">
+        <result property="major" column="class_name"/>
+        <result property="subclass" column="subclass_name"/>
+    </resultMap>
+
+    <select id="DecodeGeographicInformationCode" resultMap="GeographicInformationCode">
+        SELECT province_name,prefecture_name,county_name,street_name,community_name FROM tb_geographic WHERE
+            province_code = #{province} AND prefecture_code = #{prefecture} AND county_code = #{county}
+            AND street_code = #{street} AND community_code = #{community}
+    </select>
+    <select id="DecodeDisasterCodeSubclass" resultMap="DisasterCode_class">
+        SELECT class_name,subclass_name FROM tb_disaster_class WHERE
+            class_code = #{major} AND subclass_code = #{subclass}
+    </select>
+    <select id="DecodeDisasterCodeQuota" resultMap="DisasterCode_quota">
+        SELECT class_name,quota_name FROM tb_disaster_quota WHERE
+            class_code = #{major} AND quota_code = #{quota}
+    </select>
+    <select id="DecodeSourceCode" resultMap="SourceCode">
+        SELECT class_name,subclass_name FROM tb_source WHERE
+            class_code = #{major} AND subclass_code = #{subclass}
+    </select>
+    <select id="DecodeCarrierCode" resultType="java.lang.String">
+        SELECT name FROM tb_carrier WHERE code = #{code}
+    </select>
+
+
+
+    <resultMap id="GeographicInformationEncode" type="GeographicInformationCode">
+        <id property="rawData" column="rawData" />
+        <result property="province" column="province_code"/>
+        <result property="prefecture" column="prefecture_code"/>
+        <result property="county" column="county_code"/>
+        <result property="street" column="street_code"/>
+        <result property="community" column="community_code"/>
+    </resultMap>
+    <resultMap id="SourceEncode" type="SourceCode">
+        <result property="major" column="class_code"/>
+        <result property="subclass" column="subclass_code"/>
+    </resultMap>
+    <resultMap id="DisasterEncode_class" type="DisasterCode">
+        <result property="major" column="class_code"/>
+        <result property="subclass" column="subclass_code"/>
+    </resultMap>
+    <select id="EncodeGeographicInformationCode" resultMap="GeographicInformationEncode">
+        SELECT province_code,prefecture_code,county_code,street_code,community_code FROM tb_geographic WHERE
+            province_name = #{province} AND prefecture_name = #{prefecture} AND county_name = #{county}
+            AND street_name = #{street} AND community_name = #{community}
+    </select>
+    <select id="EncodeSourceCode" resultMap="SourceEncode">
+        SELECT class_code,subclass_code FROM tb_source WHERE
+            class_name = #{major} AND subclass_name = #{subclass}
+    </select>
+    <select id="EncodeCarrierCode" resultType="java.lang.String">
+        SELECT code FROM tb_carrier WHERE name = #{carrier}
+    </select>
+    <select id="EncodeDisasterCodeSubclass" resultMap="DisasterEncode_class">
+        SELECT class_code,subclass_code FROM tb_disaster_class WHERE
+            class_name = #{major} AND subclass_name = #{subclass}
+    </select>
+    <select id="EncodeDisasterQuota" resultType="java.lang.String">
+        SELECT quota_code FROM tb_disaster_quota WHERE quota_name = #{quota}
+    </select>
+
+
+
+
+    <select id="findAll" resultType="com.project.code_manager.entity.CodeItem">
+        SELECT * FROM tb_item
+    </select>
+    <insert id="InsertCode" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_item(code,geographic,data_time,source,carrier,disaster,remark) VALUES(#{code},#{geographic},#{data_time},#{source},#{carrier},#{disaster},#{remark})
+    </insert>
+    <insert id="addUrl">
+        UPDATE tb_item SET url = #{url} WHERE id = #{id}
+    </insert>
+    <delete id="deleteItem">
+        DELETE FROM tb_item WHERE id = #{id}
+    </delete>
+
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.code_manager.dao.CodeDao">
+    <resultMap id="GeographicInformationCode" type="GeographicInformationCode">
+        <id property="rawData" column="rawData" />
+        <result property="province" column="province_name"/>
+        <result property="prefecture" column="prefecture_name"/>
+        <result property="county" column="county_name"/>
+        <result property="street" column="street_name"/>
+        <result property="community" column="community_name"/>
+    </resultMap>
+
+    <resultMap id="DisasterCode_class" type="DisasterCode">
+        <result property="major" column="class_name"/>
+        <result property="subclass" column="subclass_name"/>
+    </resultMap>
+    <resultMap id="DisasterCode_quota" type="DisasterCode">
+        <result property="major" column="class_name"/>
+        <result property="quota" column="quota_name"/>
+    </resultMap>
+
+    <resultMap id="SourceCode" type="SourceCode">
+        <result property="major" column="class_name"/>
+        <result property="subclass" column="subclass_name"/>
+    </resultMap>
+
+    <select id="DecodeGeographicInformationCode" resultMap="GeographicInformationCode">
+        SELECT province_name,prefecture_name,county_name,street_name,community_name FROM tb_geographic WHERE
+            province_code = #{province} AND prefecture_code = #{prefecture} AND county_code = #{county}
+            AND street_code = #{street} AND community_code = #{community}
+    </select>
+    <select id="DecodeDisasterCodeSubclass" resultMap="DisasterCode_class">
+        SELECT class_name,subclass_name FROM tb_disaster_class WHERE
+            class_code = #{major} AND subclass_code = #{subclass}
+    </select>
+    <select id="DecodeDisasterCodeQuota" resultMap="DisasterCode_quota">
+        SELECT class_name,quota_name FROM tb_disaster_quota WHERE
+            class_code = #{major} AND quota_code = #{quota}
+    </select>
+    <select id="DecodeSourceCode" resultMap="SourceCode">
+        SELECT class_name,subclass_name FROM tb_source WHERE
+            class_code = #{major} AND subclass_code = #{subclass}
+    </select>
+    <select id="DecodeCarrierCode" resultType="java.lang.String">
+        SELECT name FROM tb_carrier WHERE code = #{code}
+    </select>
+
+
+
+    <resultMap id="GeographicInformationEncode" type="GeographicInformationCode">
+        <id property="rawData" column="rawData" />
+        <result property="province" column="province_code"/>
+        <result property="prefecture" column="prefecture_code"/>
+        <result property="county" column="county_code"/>
+        <result property="street" column="street_code"/>
+        <result property="community" column="community_code"/>
+    </resultMap>
+    <resultMap id="SourceEncode" type="SourceCode">
+        <result property="major" column="class_code"/>
+        <result property="subclass" column="subclass_code"/>
+    </resultMap>
+    <resultMap id="DisasterEncode_class" type="DisasterCode">
+        <result property="major" column="class_code"/>
+        <result property="subclass" column="subclass_code"/>
+    </resultMap>
+    <select id="EncodeGeographicInformationCode" resultMap="GeographicInformationEncode">
+        SELECT province_code,prefecture_code,county_code,street_code,community_code FROM tb_geographic WHERE
+            province_name = #{province} AND prefecture_name = #{prefecture} AND county_name = #{county}
+            AND street_name = #{street} AND community_name = #{community}
+    </select>
+    <select id="EncodeSourceCode" resultMap="SourceEncode">
+        SELECT class_code,subclass_code FROM tb_source WHERE
+            class_name = #{major} AND subclass_name = #{subclass}
+    </select>
+    <select id="EncodeCarrierCode" resultType="java.lang.String">
+        SELECT code FROM tb_carrier WHERE name = #{carrier}
+    </select>
+    <select id="EncodeDisasterCodeSubclass" resultMap="DisasterEncode_class">
+        SELECT class_code,subclass_code FROM tb_disaster_class WHERE
+            class_name = #{major} AND subclass_name = #{subclass}
+    </select>
+    <select id="EncodeDisasterQuota" resultType="java.lang.String">
+        SELECT quota_code FROM tb_disaster_quota WHERE quota_name = #{quota}
+    </select>
+
+
+
+
+    <select id="findAll" resultType="com.project.code_manager.entity.CodeItem">
+        SELECT * FROM tb_item
+    </select>
+    <insert id="InsertCode" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_item(code,geographic,data_time,source,carrier,disaster,remark) VALUES(#{code},#{geographic},#{data_time},#{source},#{carrier},#{disaster},#{remark})
+    </insert>
+    <insert id="addUrl">
+        UPDATE tb_item SET url = #{url} WHERE id = #{id}
+    </insert>
+    <delete id="deleteItem">
+        DELETE FROM tb_item WHERE id = #{id}
+    </delete>
+
+>>>>>>> ac191af (update)
+</mapper>

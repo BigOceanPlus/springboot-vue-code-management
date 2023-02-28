@@ -1,0 +1,9 @@
+<<<<<<< HEAD
+Manifest-Version: 1.0
+Main-Class: com.project.code_manager.CodeManagerApplication
+
+=======
+Manifest-Version: 1.0
+Main-Class: com.project.code_manager.CodeManagerApplication
+
+>>>>>>> ac191af (update)
